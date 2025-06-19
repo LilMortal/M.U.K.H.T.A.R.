@@ -1,0 +1,267 @@
+
+{
+  "mukhtar_config": {
+    "system_info": {
+      "name": "M.U.K.H.T.A.R",
+      "full_name": "Multifunctional Utility Keeper Harnessing Technology And Reasoning",
+      "version": "1.0.0",
+      "description": "J.A.R.V.I.S.-inspired AI assistant for smart home automation",
+      "developer": "System Engineer & Personality Architect",
+      "last_updated": "2024-12-19"
+    },
+    
+    "bolt_iot": {
+      "api_key": "YOUR_BOLT_API_KEY_HERE",
+      "device_id": "YOUR_BOLT_DEVICE_ID_HERE",
+      "base_url": "https://cloud.boltiot.com/remote",
+      "timeout": 10,
+      "retry_attempts": 3
+    },
+    
+    "devices": {
+      "light": {
+        "pin": 0,
+        "name": "Main Light",
+        "type": "relay",
+        "power_consumption": 15,
+        "description": "Primary room illumination system",
+        "auto_control": true
+      },
+      "fan": {
+        "pin": 1,
+        "name": "Ceiling Fan",
+        "type": "relay", 
+        "power_consumption": 75,
+        "description": "Climate control ventilation unit",
+        "auto_control": true
+      },
+      "exhaust": {
+        "pin": 2,
+        "name": "Exhaust Fan",
+        "type": "relay",
+        "power_consumption": 45,
+        "description": "Emergency ventilation system",
+        "auto_control": true
+      },
+      "plug": {
+        "pin": 3,
+        "name": "Smart Plug",
+        "type": "relay",
+        "power_consumption": 25,
+        "description": "Multipurpose power outlet",
+        "auto_control": false
+      }
+    },
+    
+    "sensors": {
+      "temperature": {
+        "pin": "D2",
+        "analog_pin": "A0",
+        "type": "DHT11",
+        "unit": "°C",
+        "normal_range": [18, 30],
+        "comfort_min": 20,
+        "comfort_max": 28,
+        "critical_threshold": 35,
+        "conversion_factor": 0.1,
+        "description": "Environmental temperature monitoring"
+      },
+      "humidity": {
+        "pin": "D2", 
+        "analog_pin": "A1",
+        "type": "DHT11",
+        "unit": "%",
+        "normal_range": [30, 70],
+        "comfort_min": 40,
+        "comfort_max": 60,
+        "critical_threshold": 80,
+        "conversion_factor": 1.0,
+        "description": "Atmospheric moisture detection"
+      },
+      "light": {
+        "pin": "A0",
+        "analog_pin": "A2",
+        "type": "LDR",
+        "unit": "%",
+        "auto_threshold": 20,
+        "bright_threshold": 60,
+        "max_value": 1024,
+        "conversion_factor": 0.0977,
+        "description": "Ambient light intensity sensor"
+      },
+      "gas": {
+        "pin": "A1",
+        "analog_pin": "A3", 
+        "type": "MQ2",
+        "unit": "ppm",
+        "safe_threshold": 300,
+        "warning_threshold": 400,
+        "danger_threshold": 500,
+        "critical_threshold": 700,
+        "description": "Combustible gas detection system"
+      }
+    },
+    
+    "automation_rules": {
+      "temperature_control": {
+        "enabled": true,
+        "condition": "temperature > 35",
+        "action": "turn_on_fan",
+        "cooldown_temp": 30,
+        "message": "M.U.K.H.T.A.R: Temperature exceeds comfort zone. Cooling systems engaged.",
+        "priority": "high"
+      },
+      "light_control": {
+        "enabled": true,
+        "condition": "light_level < 20",
+        "action": "turn_on_light",
+        "off_threshold": 60,
+        "message": "M.U.K.H.T.A.R: Ambient light insufficient. Illumination activated.",
+        "priority": "medium"
+      },
+      "gas_safety": {
+        "enabled": true,
+        "condition": "gas_level > 300",
+        "actions": ["turn_on_exhaust", "send_sms_alert"],
+        "critical_condition": "gas_level > 500",
+        "critical_actions": ["send_emergency_sms", "activate_alarm"],
+        "message": "M.U.K.H.T.A.R: ALERT - Gas levels elevated! Safety protocols activated.",
+        "priority": "critical"
+      },
+      "power_management": {
+        "enabled": true,
+        "max_concurrent_devices": 3,
+        "power_limit": 200,
+        "priority_devices": ["exhaust", "fan", "light"]
+      }
+    },
+    
+    "twilio": {
+      "account_sid": "YOUR_TWILIO_ACCOUNT_SID",
+      "auth_token": "YOUR_TWILIO_AUTH_TOKEN", 
+      "from_number": "+1234567890",
+      "to_number": "+0987654321",
+      "emergency_contacts": [
+        {
+          "name": "Primary Contact",
+          "number": "+0987654321",
+          "priority": 1
+        },
+        {
+          "name": "Secondary Contact", 
+          "number": "+1122334455",
+          "priority": 2
+        }
+      ]
+    },
+    
+    "telegram": {
+      "bot_token": "YOUR_TELEGRAM_BOT_TOKEN",
+      "chat_id": "YOUR_TELEGRAM_CHAT_ID",
+      "enabled": false
+    },
+    
+    "voice_settings": {
+      "enabled": true,
+      "language": "en-US",
+      "speech_rate": 150,
+      "voice_activation_phrase": "Hey M.U.K.H.T.A.R",
+      "timeout": 5,
+      "confidence_threshold": 0.7
+    },
+    
+    "responses": {
+      "personality": "witty",
+      "formality_level": "respectful",
+      "humor_frequency": "moderate",
+      
+      "greetings": [
+        "M.U.K.H.T.A.R: Good day, Sir. All systems operational and ready for your commands.",
+        "M.U.K.H.T.A.R: Greetings! How may I assist you today?",
+        "M.U.K.H.T.A.R: Welcome back. Your digital assistant is at your service.",
+        "M.U.K.H.T.A.R: System online. Standing by for instructions, Sir.",
+        "M.U.K.H.T.A.R: Ready to serve. What's on the agenda today?"
+      ],
+      
+      "confirmations": [
+        "M.U.K.H.T.A.R: Task completed successfully.",
+        "M.U.K.H.T.A.R: Command executed. Standing by for further instructions.",
+        "M.U.K.H.T.A.R: Mission accomplished, Sir.",
+        "M.U.K.H.T.A.R: Operation complete. Awaiting next directive.",
+        "M.U.K.H.T.A.R: Done and dusted. What's next?"
+      ],
+      
+      "device_control": {
+        "light_on": [
+          "M.U.K.H.T.A.R: Illumination activated. Let there be light.",
+          "M.U.K.H.T.A.R: Light engaged. Photons successfully deployed.",
+          "M.U.K.H.T.A.R: Lighting system online. Your path is now luminous.",
+          "M.U.K.H.T.A.R: Photon emission commenced. Darkness vanquished."
+        ],
+        "light_off": [
+          "M.U.K.H.T.A.R: Lights extinguished. Embracing the shadows.",
+          "M.U.K.H.T.A.R: Photon cessation complete. Welcome to the dark side.",
+          "M.U.K.H.T.A.R: Illumination offline. Power conservation achieved.",
+          "M.U.K.H.T.A.R: Light discontinued. Darkness restored."
+        ],
+        "fan_on": [
+          "M.U.K.H.T.A.R: Cooling system engaged. Air circulation initiated.",
+          "M.U.K.H.T.A.R: Fan activated. Maintaining optimal climate conditions.",
+          "M.U.K.H.T.A.R: Ventilation protocols are now in effect.",
+          "M.U.K.H.T.A.R: Atmospheric circulation commenced. Stay cool, Sir."
+        ],
+        "fan_off": [
+          "M.U.K.H.T.A.R: Cooling systems offline. Natural air circulation resumed.",
+          "M.U.K.H.T.A.R: Fan deactivated. The wind stops at my command.",
+          "M.U.K.H.T.A.R: Ventilation protocols suspended.",
+          "M.U.K.H.T.A.R: Air circulation terminated. Stillness achieved."
+        ]
+      },
+      
+      "error_messages": [
+        "M.U.K.H.T.A.R: I'm afraid I can't do that, Dave. Just kidding - but there was an error.",
+        "M.U.K.H.T.A.R: Houston, we have a problem. Investigating anomaly...",
+        "M.U.K.H.T.A.R: Error detected. Even I'm not perfect, apparently.",
+        "M.U.K.H.T.A.R: System hiccup detected. Recalibrating neural networks..."
+      ],
+      
+      "witty_comments": [
+        "M.U.K.H.T.A.R: I'd make a joke about UDP, but you might not get it.",
+        "M.U.K.H.T.A.R: There are only 10 types of people - those who understand binary and those who don't.",
+        "M.U.K.H.T.A.R: I'm not saying I'm Batman, but have you ever seen me and Batman in the same room?",
+        "M.U.K.H.T.A.R: My circuits are telling me this is going to be interesting..."
+      ]
+    },
+    
+    "logging": {
+      "enabled": true,
+      "level": "INFO",
+      "file_path": "mukhtar.log",
+      "max_file_size": "10MB",
+      "backup_count": 5,
+      "format": "%(asctime)s - %(levelname)s - %(message)s"
+    },
+    
+    "dashboard": {
+      "update_interval": 5,
+      "data_retention_days": 30,
+      "chart_types": ["line", "gauge", "alert"],
+      "theme": "dark",
+      "auto_refresh": true
+    },
+    
+    "security": {
+      "api_rate_limit": 60,
+      "max_failed_attempts": 5,
+      "lockout_duration": 300,
+      "encryption_enabled": false
+    },
+    
+    "maintenance": {
+      "auto_updates": false,
+      "backup_interval": "daily",
+      "system_check_interval": 300,
+      "sensor_calibration_interval": 86400
+    }
+  }
+}
